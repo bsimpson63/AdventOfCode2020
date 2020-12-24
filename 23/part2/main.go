@@ -21,9 +21,9 @@ func printCups(c *cup, MaxCups int) {
 
 func main() {
 
-	//input := "789465123"
-	input := "389125467"
-	MaxCups := len(input)
+	input := "789465123"
+	//input := "389125467"
+	MaxCups := 1000000
 
 	cupIDs := make([]int, MaxCups)
 	for i, c := range input {
@@ -32,6 +32,10 @@ func main() {
 			fmt.Println("oops")
 		}
 		cupIDs[i] = v
+	}
+
+	for i := 10; i <= MaxCups; i++ {
+		cupIDs[i-1] = i
 	}
 
 	cups := make(map[int]*cup)
@@ -53,8 +57,11 @@ func main() {
 	cups[cupIDs[MaxCups-1]].next = cups[cupIDs[0]]
 
 	current := cups[cupIDs[0]]
-	for move := 1; move <= 100; move++ {
-		fmt.Printf("move %d\n", move)
+	for move := 1; move <= 10000000; move++ {
+		if move%1000 == 0 {
+			fmt.Printf("move %d\n", move)
+		}
+		//
 		//printCups(current, MaxCups)
 
 		pickedUp := make([]int, 3)
